@@ -2,10 +2,11 @@ var express = require('express'),  // web framework
     mongoose = require('mongoose'),  // mongodb object modelling tool
     bodyParser = require('body-parser');  // allows parsing the body of incoming http requests
 
-
+// connect to the database and load the models
 var db = mongoose.connect('mongodb://localhost/expensesAPI');
-
 var Expense = require('./models/expenseModel');
+
+// start the app
 var app = express();
 
 // gets port number from environment. Defaults to 3000.
