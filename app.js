@@ -1,5 +1,6 @@
-var express = require('express'),
-    mongoose = require('mongoose');
+var express = require('express'),  // web framework
+    mongoose = require('mongoose'),  // mongodb object modelling tool
+    bodyParser = require('body-parser');  // allows parsing the body of incoming http requests
 
 
 var db = mongoose.connect('mongodb://localhost/expensesAPI');
@@ -10,9 +11,22 @@ var app = express();
 // gets port number from environment. Defaults to 3000.
 var port = process.env.PORT || 3000;
 
+// tell the app that we're using a body parser
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+
 var expensesRouter = express.Router();
 
 expensesRouter.route('/Expenses')
+    .post(function(req, res){
+        // create a new expense object from the posted data
+        var expense = new Expense(req.body);
+        // save the expense
+        expense.save();
+        // return 201 (created) and the newly created expense instance
+        res.status(201).send(expense);
+
+    })
     .get(function(req, res){
         // note: you can just do var query = req.query and pass that in (and it will work), but will
         // send any user input to the database as long as it's in the params
