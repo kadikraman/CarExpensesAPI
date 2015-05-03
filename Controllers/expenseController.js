@@ -30,7 +30,15 @@ var expenseController = function(Expense){
                 res.status(500).send(err);
             }
             else{
-                res.json(expenses);
+                // add hypermedia
+                var returnExpenses = [];
+                expenses.forEach(function(element, index, array){
+                    var newExpense = element.toJSON();
+                    newExpense.links = {};
+                    newExpense.links.self = 'http://' + req.headers.host + '/api/expenses/' + newExpense._id;
+                    returnExpenses.push(newExpense);
+                });
+                res.json(returnExpenses);
             }
         });
     };

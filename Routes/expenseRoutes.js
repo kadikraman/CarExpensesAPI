@@ -40,7 +40,13 @@ var routes = function(Expense){
 
     expenseRouter.route('/:expenseId')
         .get(function(req, res){
-            res.json(req.expense);
+            // add hypermedia links
+            var returnExpense = req.expense.toJSON();
+            returnExpense.links = {};
+            var newLink = 'http://' + req.headers.host + '/api/expenses/?type=' + returnExpense.type;
+            returnExpense.links.FilterByThisType = newLink.replace(' ', '%20');
+
+            res.json(returnExpense);
         })
         .put(function(req, res){
             req.expense.type = req.body.type;
