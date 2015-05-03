@@ -2,7 +2,7 @@ var should = require('should'),  // assertion framework
     sinon = require('sinon');  // mocking framework
 // note: we don't need a reference to mocha, because it runs inside the mocha framework (gulp-mocha for us)
 
-describe('Expense controller Tests: ', function(){
+describe('Expenses controller tests: ', function(){
     describe('Post', function(){
         it('should not allow an empty type on an expense', function(){
             // mock out out expense object and implement the save() method which will be called in the controller
@@ -24,7 +24,7 @@ describe('Expense controller Tests: ', function(){
             };
 
             // execute the test
-            var expenseController = require('../Controllers/expenseController')(Expense);
+            var expenseController = require('./expensesController')(Expense);
             expenseController.post(req, res);
 
             // assertions

@@ -23,7 +23,7 @@ var port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-expenseRouter = require('./Routes/expenseRoutes')(Expense);
+expenseRouter = require('./routes/expenseRoutes')(Expense);
 
 app.use('/api/expenses', expenseRouter);
 

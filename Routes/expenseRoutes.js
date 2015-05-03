@@ -9,11 +9,12 @@ var routes = function(Expense){
     var expenseRouter = express.Router();
 
     // use a controller to encapsulate the code and make it testable
-    var expenseController = require('../Controllers/expenseController')(Expense);
+    var expensesController = require('../controllers/expensesController')(Expense);
+    var expenseController = require('../controllers/expenseController')();
 
     expenseRouter.route('/')
-        .post(expenseController.post)
-        .get(expenseController.get);
+        .post(expensesController.post)
+        .get(expensesController.get);
 
     /**
      * Middleware. Gets executed just before the request is passed onto the router.
@@ -39,59 +40,10 @@ var routes = function(Expense){
     });
 
     expenseRouter.route('/:expenseId')
-        .get(function(req, res){
-            // add hypermedia links
-            var returnExpense = req.expense.toJSON();
-            returnExpense.links = {};
-            var newLink = 'http://' + req.headers.host + '/api/expenses/?type=' + returnExpense.type;
-            returnExpense.links.FilterByThisType = newLink.replace(' ', '%20');
-
-            res.json(returnExpense);
-        })
-        .put(function(req, res){
-            req.expense.type = req.body.type;
-            req.expense.cost = req.body.cost;
-            req.expense.mileage = req.body.mileage;
-            req.expense.comment = req.body.comment;
-            req.expense.litres = req.body.litres;
-            req.expense.date = req.body.date;
-            req.expense.save(function(err){
-                if(err){
-                    res.status(500).send(err);
-                }
-                else{
-                    res.json(req.expense);
-                }
-            });
-        })
-        .patch(function(req, res){
-            if(req.body._id){
-                // we do not want to allow the user to update the id
-                delete req.body._id;
-            }
-            for(var p in req.body){
-                req.expense[p] = req.body[p];
-            }
-            req.expense.save(function(err){
-                if(err){
-                    res.status(500).send(err);
-                }
-                else{
-                    res.json(req.expense);
-                }
-            });
-
-        })
-        .delete(function(req, res){
-            req.expense.remove(function(err){
-                if(err){
-                    res.status(500).send(err);
-                }
-                else{
-                    res.status(204).send('Removed');
-                }
-            });
-        });
+        .get(expenseController.get)
+        .put(expenseController.put)
+        .patch(expenseController.patch)
+        .delete(expenseController.delete);
     return expenseRouter;
 };
 
