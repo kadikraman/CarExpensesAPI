@@ -9,12 +9,11 @@ var routes = function(Expense){
     var expenseRouter = express.Router();
 
     // use a controller to encapsulate the code and make it testable
-    var expensesController = require('../controllers/expensesController')(Expense);
-    var expenseController = require('../controllers/expenseController')();
+    var expenseController = require('../controllers/expenseController')(Expense);
 
     expenseRouter.route('/')
-        .post(expensesController.post)
-        .get(expensesController.get);
+        .post(expenseController.post)
+        .get(expenseController.getAll);
 
     /**
      * Middleware. Gets executed just before the request is passed onto the router.
@@ -40,7 +39,7 @@ var routes = function(Expense){
     });
 
     expenseRouter.route('/:expenseId')
-        .get(expenseController.get)
+        .get(expenseController.getOne)
         .put(expenseController.put)
         .patch(expenseController.patch)
         .delete(expenseController.delete);

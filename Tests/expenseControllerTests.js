@@ -105,5 +105,66 @@ describe('Expense controller tests: ', function() {
             res.status.calledWith(400).should.equal(true);
             res.send.calledWith('Expense date is required (use Patch to edit a singe field).').should.equal(true);
         });
-    })
-})
+    });
+
+    describe('Post', function(){
+        it('should not allow an empty cost on an expense', function(){
+            // mock out out expense object and implement the save() method which will be called in the controller
+            // which won't do anything (we don't need it to for this test)
+            var Expense = function(expense){this.save = function(){}};
+
+            // mock out the request
+            var req = {
+                body: {
+                    type: "petrol",
+                    mileage: 123456,
+                    date: "2015-05-12"
+                }
+            };
+
+            // mock out the response
+            // sinon.spy() keeps track of how many times these methods were called an by whom
+            var res = {
+                status: sinon.spy(),
+                send: sinon.spy()
+            };
+
+            // execute the test
+            var expensesController = require('../controllers/expenseController')(Expense);
+            expensesController.post(req, res);
+
+            // assertions
+            res.status.calledWith(400).should.equal(true, 'Bad Status: ' + res.status.args[0][0]);
+            res.send.calledWith('Expense cost is required.').should.equal(true);
+        });
+        it('should not allow an empty date on an expense', function(){
+            // mock out out expense object and implement the save() method which will be called in the controller
+            // which won't do anything (we don't need it to for this test)
+            var Expense = function(expense){this.save = function(){}};
+
+            // mock out the request
+            var req = {
+                body: {
+                    type: "petrol",
+                    cost: 10.45,
+                    mileage: 123456
+                }
+            };
+
+            // mock out the response
+            // sinon.spy() keeps track of how many times these methods were called an by whom
+            var res = {
+                status: sinon.spy(),
+                send: sinon.spy()
+            };
+
+            // execute the test
+            var expensesController = require('../controllers/expenseController')(Expense);
+            expensesController.post(req, res);
+
+            // assertions
+            res.status.calledWith(400).should.equal(true, 'Bad Status: ' + res.status.args[0][0]);
+            res.send.calledWith('Expense date is required.').should.equal(true);
+        })
+    });
+});
