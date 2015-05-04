@@ -28,3 +28,6 @@ module.exports = {
 };
 
 run: gulp prod
+
+
+! when doing requests, must put Content-Type application/json in the header or the requests won't work

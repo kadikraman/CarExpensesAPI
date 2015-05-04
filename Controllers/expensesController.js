@@ -13,6 +13,14 @@ var expensesController = function(Expense){
             res.status(400);
             res.send('Expense type is required.');
         }
+        else if(!req.body.cost){
+            res.status(400);
+            res.send('Expense cost is required.');
+        }
+        else if(!req.body.date){
+            res.status(400);
+            res.send('Expense date is required.');
+        }
         else{
             // save the expense
             expense.save();

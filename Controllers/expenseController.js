@@ -16,20 +16,34 @@ var expenseController = function(){
     };
 
     var put = function(req, res){
-        req.expense.type = req.body.type;
-        req.expense.cost = req.body.cost;
-        req.expense.mileage = req.body.mileage;
-        req.expense.comment = req.body.comment;
-        req.expense.litres = req.body.litres;
-        req.expense.date = req.body.date;
-        req.expense.save(function(err){
-            if(err){
-                res.status(500).send(err);
-            }
-            else{
-                res.json(req.expense);
-            }
-        });
+        if(!req.body.type){
+            res.status(400);
+            res.send('Expense type is required (use Patch to edit a singe field).');
+        }
+        else if(!req.body.cost){
+            res.status(400);
+            res.send('Expense cost is required (use Patch to edit a singe field).');
+        }
+        else if(!req.body.date){
+            res.status(400);
+            res.send('Expense date is required (use Patch to edit a singe field).');
+        }
+        else {
+            req.expense.type = req.body.type;
+            req.expense.cost = req.body.cost;
+            req.expense.mileage = req.body.mileage;
+            req.expense.comment = req.body.comment;
+            req.expense.litres = req.body.litres;
+            req.expense.date = req.body.date;
+            req.expense.save(function (err) {
+                if (err) {
+                    res.status(500).send(err);
+                }
+                else {
+                    res.json(req.expense);
+                }
+            });
+        };
     };
 
     var patch = function(req, res){

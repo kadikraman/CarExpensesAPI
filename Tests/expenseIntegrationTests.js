@@ -9,7 +9,7 @@ var should = require('should'),
 describe('Expense CRUD Test', function(){
     it('Should allow an expense to be posted and return an _id', function(done){
         // create the post body
-        var expensePost = {type: 'petrol', cost: 10.23, mileage: 12345, comment: 'comment', litres: 10};
+        var expensePost = {type: 'petrol', cost: 10.23, mileage: 12345, comment: 'comment', litres: 10, date: '2015-05-12'};
 
         // user the agent to do the post
         agent.post('/api/expenses')
