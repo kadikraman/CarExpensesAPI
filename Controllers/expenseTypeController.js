@@ -1,14 +1,25 @@
 var expenseTypeController = function(ExpenseType){
     /**
-     * Saves a new expense type to the database.
+     * Creates a new expense type from the request body and saves it to the database.
+     * Does not allow the expense type 'name' or 'description' to not be defined.
      */
     var post = function(req, res){
-        // create a new expense type from the request body and save it
+        // create a new expense type from the request body
         var expenseType = new ExpenseType(req.body);
-        expenseType.save();
-        // return status 201 (created) and the newly created expense type
-        res.status(201);
-        res.send(expenseType);
+        if(!req.body.name){
+            res.status(400);
+            res.send('ExpenseType name is required.');
+        }
+        else if(!req.body.description){
+            res.status(400);
+            res.send('ExpenseType description is required.');
+        }
+        else {
+            expenseType.save();
+            // return status 201 (created) and the newly created expense type
+            res.status(201);
+            res.send(expenseType);
+        }
     };
 
     /**
