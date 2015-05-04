@@ -12,8 +12,7 @@ var expenseModel = new Schema({
         type: Number
     },
     date: {
-        type: Date,
-        default: Date.now
+        type: Date
     },
     comment: {
         type: String

@@ -20,6 +20,7 @@ switch(process.env.ENV){
 }
 
 var Expense = require('./models/expenseModel');
+var ExpenseType = require('./models/expenseTypeModel');
 
 // start the app
 var app = express();
@@ -32,8 +33,10 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 expenseRouter = require('./routes/expenseRoutes')(Expense);
+expenseTypeRouter = require('./routes/expenseTypeRoutes')(ExpenseType);
 
 app.use('/api/expenses', expenseRouter);
+app.use('/api/expense_types', expenseTypeRouter);
 
 app.get('/', function(req, res){
    res.send('Welcome to my API!');

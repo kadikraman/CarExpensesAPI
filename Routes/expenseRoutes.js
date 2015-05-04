@@ -33,7 +33,7 @@ var routes = function(Expense){
                 next();
             }
             else{
-                // if the book is not found, send a 404 (and the request will never go downstream)
+                // if the expense is not found, send a 404 (and the request will never go downstream)
                 res.status(404).send('No expense found');
             }
         })
@@ -44,6 +44,7 @@ var routes = function(Expense){
         .put(expenseController.put)
         .patch(expenseController.patch)
         .delete(expenseController.delete);
+
     return expenseRouter;
 };
 
