@@ -4,11 +4,19 @@ var express = require('express'),  // web framework
 
 // connect to the database and load the models (choose DB based on the environment)
 var db;
-if(process.env.ENV == 'Test'){
-    db = mongoose.connect('mongodb://localhost/expensesAPI_test');
-}
-else{
-    db = mongoose.connect('mongodb://localhost/expensesAPI');
+switch(process.env.ENV){
+    case 'Production':
+        var config = require('./config')['prod']
+        db = mongoose.connect('mongodb://' + config['db']['username'] + ':'
+                                            + config['db']['password'] + '@'
+                                            + config['db']['host']);
+        break;
+    case 'Test':
+        db = mongoose.connect('mongodb://localhost/expensesAPI_test');
+        break;
+    default:
+        db = mongoose.connect('mongodb://localhost/expensesAPI');
+        break;
 }
 
 var Expense = require('./models/expenseModel');
