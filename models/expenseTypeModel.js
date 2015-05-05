@@ -3,7 +3,8 @@ var mongoose = require('mongoose'),
 
 var expenseTypeModel = new Schema({
     name: {
-        type: String
+        type: String,
+        unique: true
     },
     description: {
         type: String

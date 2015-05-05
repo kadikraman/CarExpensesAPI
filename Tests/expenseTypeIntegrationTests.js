@@ -13,6 +13,7 @@ describe('Expense type CRUD Test', function(){
 
         // user the agent to do the post
         agent.post('/api/expense_types')
+            .set('Authorization', 'testkey')
             .send(expenseTypePost)
             .expect(200)
             .end(function(err, results){

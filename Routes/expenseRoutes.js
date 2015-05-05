@@ -5,11 +5,35 @@ var express = require('express');
  * @param Expense
  * @returns {*}
  */
-var routes = function(Expense){
+var routes = function(Expense, config){
     var expenseRouter = express.Router();
 
     // use a controller to encapsulate the code and make it testable
     var expenseController = require('../controllers/expenseController')(Expense);
+
+    /**
+     * Checks if the request is authorized.
+     * If the request is not authorized, returns 401 (unauthorized) if a put/patch/delete is called.
+     */
+    expenseRouter.use('/', function(req, res, next){
+        console.log(config)
+        if(req.method == 'POST' || req.method == 'PUT' || req.method == 'PATCH' || req.method == 'DELETE'){
+            if(req.headers.authorization){
+                if(req.headers.authorization == config['key']){
+                    next();
+                }
+                else{
+                    res.status(401).send('You are not authorized to edit the database.');
+                }
+            }
+            else{
+                res.status(401).send('You are not authorized to edit the database.');
+            }
+        }
+        else{
+            next();
+        }
+    });
 
     expenseRouter.route('/')
         .post(expenseController.post)
@@ -35,7 +59,7 @@ var routes = function(Expense){
                 // if the expense is not found, send a 404 (and the request will never go downstream)
                 res.status(404).send('No expense found');
             }
-        })
+        });
     });
 
     expenseRouter.route('/:expenseId')
