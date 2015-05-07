@@ -1,6 +1,8 @@
 # Car expenses API
 API for storing and fetching car expenses data. Built with node, express and mongoDB.
 
+[![Code Climate](https://codeclimate.com/github/kadikraman/CarExpensesAPI/badges/gpa.svg)](https://codeclimate.com/github/kadikraman/CarExpensesAPI)
+
 ### Usage (public)
 - **GET** <host>/api/expense_types ---- *returns all expense types registred with the system *
 - **GET** <host>/api/expense_types/<id> ----- *returns the specified expense type*
