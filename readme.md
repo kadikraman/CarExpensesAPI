@@ -40,15 +40,6 @@ module.exports = {
             username: '',
             password: ''
         }
-    },
-    prod: {
-        sessionSecret: '<<sessionsecret>>',
-        db: {
-            name: '<<dbname>>',
-            host: '<<dbhostname>>',
-            username: '<<dbusername>>',
-            password: '<<dbpassword>>'
-        }
     }
 };
 ```
