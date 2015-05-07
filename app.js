@@ -42,7 +42,7 @@ app.use('/api/expenses', expenseRouter);
 app.use('/api/expense_types', expenseTypeRouter);
 
 app.get('/', function(req, res){
-   res.send('Welcome to my API!');
+   res.sendfile('index.html');
 });
 
 app.listen(port, function(){

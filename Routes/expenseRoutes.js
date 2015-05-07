@@ -16,7 +16,6 @@ var routes = function(Expense, config){
      * If the request is not authorized, returns 401 (unauthorized) if a put/patch/delete is called.
      */
     expenseRouter.use('/', function(req, res, next){
-        console.log(config)
         if(req.method == 'POST' || req.method == 'PUT' || req.method == 'PATCH' || req.method == 'DELETE'){
             if(req.headers.authorization){
                 if(req.headers.authorization == config['key']){

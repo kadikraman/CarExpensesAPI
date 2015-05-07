@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Car expenses API</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="header">
+    Hello!
+</div>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Car expenses API</h1>
+        <h4>An interface to any and all car-related expenses from the car's initial purchase to the eventual goodbye.</h4>
+        <h5>This is a pet project that was born due to my interest in data visualisation and curiosity of
+            'how much does it actually cost to own a car'.</h5>
+        <hr>
+        <h3 class="align-left">GET expense_types</h3>
+        <p class="align-left">Resource url: http://carexpensesapi.herokuapp.com/api/expense_types</p>
+        <p class="align-left">Returns a collection containing all the registred expense types.</p>
+
+        <h3 class="align-left">GET expenses</h3>
+        <p class="align-left">Resource url: http://carexpensesapi.herokuapp.com/api/expenses</p>
+        <p class="align-left">Returns a collection of expenses (optionally filtered by the filter parameters).</p>
+        <div class="row">
+            <div class="col-md-4">type</div>
+            <div class="col-md-4">Type of the expense (e.g. petrol).</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">date</div>
+            <div class="col-md-4">Date of the expense (e.g. 2015-07-25).</div>
+        </div>
+
+
+        <h3 class="align-left">GET expenses/:id</h3>
+        <p class="align-left">Resource url: http://carexpensesapi.herokuapp.com/api/expenses/:id</p>
+        <p class="align-left">Returns the expense with the given id.</p>
+    </div>
+</div>
+
+<!-- A super minimal amount of CSS embedded in the page intentionally to keep it one-page-only. Don't judge. -->
+<style>
+    html, body {
+        height: 100%;
+        background-color: #333;
+    }
+
+    body {
+        text-align: center;
+    }
+
+    .container {
+        margin-top: 50px;
+    }
+
+    .header {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 60px;
+        background-color: #333;
+    }
+
+    .align-left{
+        text-align: left;
+    }
+</style>
+</body>
+</html>
