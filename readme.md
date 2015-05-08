@@ -27,6 +27,6 @@ In project directory:
 - run: sudo npm install gulp (to access gulp from the command line)
 - run: gulp (to start the server)
 
-To run the tests, run: gulp tests
+To run the tests, run: gulp test
 
 **dev note:** when doing requests, must put Content-Type application/json in the header

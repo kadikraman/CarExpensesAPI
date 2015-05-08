@@ -6,8 +6,12 @@ var express = require('express'),  // web framework
 var db;
 var config;
 switch(process.env.ENV){
+    case 'Production-Heroku':
+        db = mongoose.connect('mongodb://' + process.env.db_username + ':'
+        + process.env.db_password + '@' + process.env.db_host);
+        break;
     case 'Production':
-        config = require('./config')['prod'];
+        config = require('./config-prod')['prod'];
         db = mongoose.connect('mongodb://' + config['db']['username'] + ':'
                                             + config['db']['password'] + '@'
                                             + config['db']['host']);
