@@ -22,31 +22,10 @@ API for storing and fetching car expenses data. Built with node, express and mon
 - install mongoDB
 
 In project directory:
-- Create a file config.js (copying this exactly is enough to run the application locally and to run the tests)
-```
-module.exports = {
-    dev: {
-        key: 'devkey',
-        db: {
-            name: 'car_expenses_dev',
-            host: 'localhost',
-            username: '',
-            password: ''
-        }
-    },
-    test: {
-        key: 'testkey',
-        db: {
-            name: 'car_expenses_test',
-            host: 'localhost',
-            username: '',
-            password: ''
-        }
-    }
-};
-```
 - run: node install (installs dependencies)
 - run: sudo npm install gulp (to access gulp from the command line)
 - run: gulp (to start the server)
+
+To run the tests, run: gulp tests
 
 **dev note:** when doing requests, must put Content-Type application/json in the header
