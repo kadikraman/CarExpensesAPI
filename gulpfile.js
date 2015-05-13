@@ -36,7 +36,7 @@ gulp.task('prod', function(){
 });
 
 gulp.task('test', function(){
-    env({vars: {ENV: 'Test'}});
+    env({vars: {environment: 'Test'}});
     gulp.src('./tests/*.js', {read: false})
         .pipe(gulpMocha({reporter: 'nyan'}))
         .once('end', function () {
