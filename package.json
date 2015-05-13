@@ -24,6 +24,9 @@
     "sinon": "^1.14.1",
     "gulp-env": "^0.2.0"
   },
+  "engines": {
+    "node": "0.12.x"
+  },
   "devDependencies": {
     "supertest": "^0.15.0"
   }
