@@ -43,7 +43,7 @@ gulp.task('prod-heroku', function(){
         script: 'app.js',
         ext: 'js',
         env: {
-            PORT: 7000,
+            PORT: process.env.PORT,
             ENV: 'Production-Heroku'
         },
         ignore: ['./node_modules/**']
