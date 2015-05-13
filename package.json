@@ -2,9 +2,14 @@
   "name": "CarExpensesApi",
   "version": "0.0.0",
   "description": "Web API for car related expenses",
-  "main": "index.js",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kadikraman/CarExpensesAPI.git"
+  },
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "start": "node app.js"
   },
   "author": "Kadi Kraman",
   "license": "ISC",

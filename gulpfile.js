@@ -26,7 +26,7 @@ gulp.task('prod', function(){
         ext: 'js',
         env: {
             PORT: 7000,
-            ENV: 'Production'
+            environment: 'Production'
         },
         ignore: ['./node_modules/**']
     })
@@ -34,22 +34,6 @@ gulp.task('prod', function(){
             console.log('Restarting');
         });
 });
-
-/**
- * Task run on heroku to deploy the app
- */
-gulp.task('prod-heroku', function(){
-    nodemon({
-        script: 'app.js',
-        ext: 'js',
-        env: {
-            PORT: process.env.PORT,
-            ENV: 'Production-Heroku'
-        },
-        ignore: ['./node_modules/**']
-    })
-});
-
 
 gulp.task('test', function(){
     env({vars: {ENV: 'Test'}});

@@ -5,7 +5,7 @@ var express = require('express'),  // web framework
 // connect to the database and load the models (choose DB based on the environment)
 var db;
 var config;
-switch(process.env.ENV){
+switch(process.env.environment){
     case 'Production-Heroku':
         db = mongoose.connect('mongodb://' + process.env.db_username + ':'
         + process.env.db_password + '@' + process.env.db_host);
