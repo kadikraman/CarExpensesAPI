@@ -34,6 +34,15 @@ var routes = function(Expense, config){
         }
     });
 
+    /**
+    * Adds the CORS header
+    */
+    expenseRouter.use('/', use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
+
     expenseRouter.route('/')
         .post(expenseController.post)
         .get(expenseController.getAll);
